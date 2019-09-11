@@ -53,7 +53,7 @@ class App extends Component {
 
 	render() {
 		return (
-			<div>
+			<React.Fragment>
 				<AddressInput
 					address={this.state.address}
 					onKeyPress={this.handleKeyPress}
@@ -67,7 +67,7 @@ class App extends Component {
 						mapElement={<div style={{ height: `100%` }} />}
 					/>
 				</div>
-			</div>
+			</React.Fragment>
 		);
 	}
 }

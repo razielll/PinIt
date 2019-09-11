@@ -1,63 +1,27 @@
 import React, { Component } from 'react';
 import Geocode from 'react-geocode';
-import './App.scss';
 import { AddressInput, Map, ListItems, Footer } from './component/index';
-import { saveToLocalStorage, loadFromLocalStorage, isItems } from './utils';
+import './App.scss';
+import { translateAndSave, fetchFromStorage, checkInStorage } from './utils';
+import { ADDRESS_STORAGE_KEY } from './constants';
 
 Geocode.setApiKey('AIzaSyCKgE8gvERM__LG9dDbOLpAgWoHEqYtZGI');
 
 class App extends Component {
 	state = {
-		items: isItems() ? loadFromLocalStorage() : [],
+		items: checkInStorage(ADDRESS_STORAGE_KEY) ? fetchFromStorage(ADDRESS_STORAGE_KEY) : [],
 		markers: [],
 	};
 
-	handleKeyPress = e => {
-		const {
-			target: { value: addressStr },
-		} = e;
-		if (e.key === 'Enter') {
-			this.handleAddItem(addressStr);
-		}
-	};
+	handleKeyPress = async ({ target: { value }, key }) => {
 
-	handleAddItem = addressString => {
-		Geocode.fromAddress(addressString).then(
-			response => {
-				console.log('GeoCode response ->', response);
-				const formmatedObj = this.getFormattedObject(response);
-				if (saveToLocalStorage(formmatedObj)) {
-					console.log('%cSUCCESS SIR', 'color:red');
-					const items = loadFromLocalStorage();
-					// const markers = this.getMarkers(items);
-					this.setState(
-						{
-							items,
-						},
-						() => this.generateMarkers(items)
-					);
-				}
-			},
-			error => {
-				console.error(error);
+		if (key === 'Enter') {
+			const response = await translateAndSave(value);
+
+			if (response.success) {
+				this.generateMarkers(fetchFromStorage(ADDRESS_STORAGE_KEY))
 			}
-		);
-	};
-
-	getFormattedObject = response => {
-		const result = response.results[0];
-		const { formatted_address } = result;
-		const [street, city, country] = formatted_address.split(', ');
-		const { lat, lng } = result.geometry.location;
-
-		const formmatedItem = {
-			address: formatted_address,
-			street,
-			city,
-			country,
-			coords: { lat, lng },
-		};
-		return formmatedItem;
+		}
 	};
 
 	componentDidMount() {
@@ -70,19 +34,21 @@ class App extends Component {
 			lat: item.coords.lat,
 			lng: item.coords.lng,
 		}));
-		console.log('markers', markers);
-		this.setState({ markers });
+
+		this.setState({ markers, items: data });
 	};
 
 	render() {
+		const { address, items } = this.state;
+
 		return (
 			<React.Fragment>
 				<AddressInput
-					address={this.state.address}
+					address={address}
 					onKeyPress={this.handleKeyPress}
 				/>
 				<div className='site-content-wrapper'>
-					<ListItems items={this.state.items} />
+					<ListItems items={items} />
 					<Map
 						googleMapURL='https://maps.googleapis.com/maps/api/js?key=AIzaSyBe2G6Moqh0Zft5OUifEqwKb3TtRkvboxA&v=3.exp&libraries=geometry,places'
 						loadingElement={<div style={{ height: `100%` }} />}

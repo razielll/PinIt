@@ -17,38 +17,61 @@ class App extends Component {
 			target: { value: addressStr },
 		} = e;
 		if (e.key === 'Enter') {
-			this.handleSaveItem(addressStr);
+			this.handleAddItem(addressStr);
 		}
 	};
 
-	handleSaveItem = value => {
-		Geocode.fromAddress(value).then(
+	handleAddItem = addressString => {
+		Geocode.fromAddress(addressString).then(
 			response => {
 				console.log('GeoCode response ->', response);
-				const result = response.results[0];
-				const { formatted_address } = result;
-				const [street, city, country] = formatted_address.split(', ');
-				const { lat, lng } = result.geometry.location;
-
-				const item = {
-					address: formatted_address,
-					street,
-					city,
-					country,
-					coords: { lat, lng },
-				};
-				const isSuccessSave = saveToLocalStorage(item);
-				if (isSuccessSave) {
+				const formmatedObj = this.getFormattedObject(response);
+				if (saveToLocalStorage(formmatedObj)) {
 					console.log('%cSUCCESS SIR', 'color:red');
-					this.setState({
-						items: JSON.parse(localStorage.getItem('list-items')),
-					});
+					const items = loadFromLocalStorage();
+					// const markers = this.getMarkers(items);
+					this.setState(
+						{
+							items,
+						},
+						() => this.generateMarkers(items)
+					);
 				}
 			},
 			error => {
 				console.error(error);
 			}
 		);
+	};
+
+	getFormattedObject = response => {
+		const result = response.results[0];
+		const { formatted_address } = result;
+		const [street, city, country] = formatted_address.split(', ');
+		const { lat, lng } = result.geometry.location;
+
+		const formmatedItem = {
+			address: formatted_address,
+			street,
+			city,
+			country,
+			coords: { lat, lng },
+		};
+		return formmatedItem;
+	};
+
+	componentDidMount() {
+		this.generateMarkers(this.state.items);
+	}
+
+	generateMarkers = (data = []) => {
+		if (!data) return data;
+		const markers = data.map(item => ({
+			lat: item.coords.lat,
+			lng: item.coords.lng,
+		}));
+		console.log('markers', markers);
+		this.setState({ markers });
 	};
 
 	render() {

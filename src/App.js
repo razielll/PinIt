@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Geocode from 'react-geocode';
 import './App.scss';
-import { AddressInput, Map, ListItems } from './component/index';
+import { AddressInput, Map, ListItems, Footer } from './component/index';
 import { translateAndSave, fetchFromStorage, checkInStorage } from './utils';
 import { ADDRESS_STORAGE_KEY } from './constants';
 
@@ -14,27 +14,32 @@ class App extends Component {
 	};
 
 	handleKeyPress = e => {
-		const { target: { value: addressStr } } = e;
+		const { target: { value } } = e;
+		console.log(value)
 		if (e.key === 'Enter') {
-			this.handleSaveItem(addressStr);
+			translateAndSave(value);
 		}
 	};
 
-	handleSaveItem = async value => {
-		const response = await translateAndSave(value);
-
-		if (response.success) {
-			this.setState({
-				items: fetchFromStorage(ADDRESS_STORAGE_KEY)
-			});
-		};
+	componentDidMount() {
+		this.generateMarkers(this.state.items);
 	}
+
+	generateMarkers = (data = []) => {
+		if (!data) return data;
+		const markers = data.map(item => ({
+			lat: item.coords.lat,
+			lng: item.coords.lng,
+		}));
+		console.log('markers', markers);
+		this.setState({ markers });
+	};
 
 	render() {
 		const { address, items } = this.state;
 
 		return (
-			<div>
+			<React.Fragment>
 				<AddressInput
 					address={address}
 					onKeyPress={this.handleKeyPress}
@@ -46,9 +51,11 @@ class App extends Component {
 						loadingElement={<div style={{ height: `100%` }} />}
 						containerElement={<div className='map-container' />}
 						mapElement={<div style={{ height: `100%` }} />}
+						markers={this.state.markers}
 					/>
 				</div>
-			</div>
+				<Footer />
+			</React.Fragment>
 		);
 	}
 }

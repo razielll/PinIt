@@ -30,7 +30,6 @@ export function fetchFromStorage(key) {
 	return JSON.parse(localStorage.getItem(key));
 }
 
-// need a better name for this
 export function checkInStorage(key) {
 	return !!JSON.parse(localStorage.getItem(key));
 }

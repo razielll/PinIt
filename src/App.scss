@@ -1,10 +1,26 @@
 .site-content-wrapper {
 	padding-top: 40px;
 	display: flex;
-
+	height: 100%;
 	.map-container {
-		height: 400px;
 		width: 60vw;
+		height: 100%;
+	}
+
+	.list-items-container {
+		width: 40vw;
+		.list-item {
+			height: 80px;
+			transition: 0.3s all ease-in-out;
+			&.expanded {
+				height: 400px;
+			}
+			.item-header {
+				display: flex;
+				justify-content: space-evenly;
+				align-items: center;
+			}
+		}
 	}
 
 	@media (max-width: 900px) {
@@ -13,11 +29,10 @@
 			width: 100vw;
 			height: 80vh;
 		}
+		.list-items-container {
+			width: 100vw;
+		}
 	}
-}
-
-.list-items-container {
-	width: 40vw;
 }
 
 .input-container {
@@ -47,32 +62,28 @@
 	padding-left: 60px;
 }
 
-.App-logo {
-	animation: App-logo-spin infinite 20s linear;
-	height: 40vmin;
-	pointer-events: none;
-}
-
-.App-header {
-	background-color: #282c34;
-	min-height: 100vh;
+.footer {
+	width: 100vw;
 	display: flex;
-	flex-direction: column;
-	align-items: center;
+	height: 120px;
+	position: absolute;
+	bottom: 0;
 	justify-content: center;
-	font-size: calc(10px + 2vmin);
-	color: white;
-}
-
-.App-link {
-	color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-	from {
-		transform: rotate(0deg);
+	align-items: center;
+	background: lightcoral;
+	span {
+		font-size: 40px;
+		font-weight: bold;
+		color: steelblue;
+		letter-spacing: 1.5px;
+		padding: 0 20px;
+		text-transform: uppercase;
+		user-select: none;
 	}
-	to {
-		transform: rotate(360deg);
+	img {
+		transition: 0.5s all ease-out;
+	}
+	img:hover {
+		transform: scale(1.05);
 	}
 }

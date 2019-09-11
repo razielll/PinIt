@@ -21,6 +21,9 @@
 				display: flex;
 				justify-content: space-evenly;
 				align-items: center;
+				.item-icon {
+					height: 40px;
+				}
 			}
 		}
 	}
@@ -92,4 +95,8 @@
 	img:hover {
 		transform: scale(1.05);
 	}
+}
+
+.trash-icon {
+	cursor: pointer;
 }

@@ -4,7 +4,6 @@ const ListItem = props => {
 	let element = null;
 
 	const expand = () => {
-		console.log(element);
 		element.classList.toggle('expanded');
 	};
 

@@ -9,17 +9,18 @@ Geocode.setApiKey('AIzaSyCKgE8gvERM__LG9dDbOLpAgWoHEqYtZGI');
 
 class App extends Component {
 	state = {
-		items: checkInStorage(ADDRESS_STORAGE_KEY) ? fetchFromStorage(ADDRESS_STORAGE_KEY) : [],
+		items: checkInStorage(ADDRESS_STORAGE_KEY)
+			? fetchFromStorage(ADDRESS_STORAGE_KEY)
+			: [],
 		markers: [],
 	};
 
 	handleKeyPress = async ({ target: { value }, key }) => {
-
 		if (key === 'Enter') {
 			const response = await translateAndSave(value);
 
 			if (response.success) {
-				this.generateMarkers(fetchFromStorage(ADDRESS_STORAGE_KEY))
+				this.generateMarkers(fetchFromStorage(ADDRESS_STORAGE_KEY));
 			}
 		}
 	};
@@ -38,17 +39,18 @@ class App extends Component {
 		this.setState({ markers, items: data });
 	};
 
+	handleDelete = id => {
+		console.log('%cWill delete id #', 'color:red; font-size: 12px;', id);
+	};
+
 	render() {
 		const { address, items } = this.state;
 
 		return (
 			<React.Fragment>
-				<AddressInput
-					address={address}
-					onKeyPress={this.handleKeyPress}
-				/>
+				<AddressInput address={address} onKeyPress={this.handleKeyPress} />
 				<div className='site-content-wrapper'>
-					<ListItems items={items} />
+					<ListItems items={items} onDelete={this.handleDelete} />
 					<Map
 						googleMapURL='https://maps.googleapis.com/maps/api/js?key=AIzaSyBe2G6Moqh0Zft5OUifEqwKb3TtRkvboxA&v=3.exp&libraries=geometry,places'
 						loadingElement={<div style={{ height: `100%` }} />}

@@ -4,7 +4,7 @@
 	height: 100%;
 	.map-container {
 		width: 60vw;
-		height: 100%;
+		height: 600px;
 	}
 
 	.list-items-container {
@@ -27,7 +27,6 @@
 		flex-direction: column;
 		.map-container {
 			width: 100vw;
-			height: 80vh;
 		}
 		.list-items-container {
 			width: 100vw;
@@ -39,6 +38,10 @@
 	width: 60vw;
 	margin: 0 auto;
 	position: relative;
+	height: 10vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	&:after {
 		content: '+';
 		position: absolute;

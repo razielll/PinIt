@@ -1,7 +1,5 @@
-html,
-body,
-#root {
-	height: 100%;
+* {
+	box-sizing: border-box;
 }
 
 body {
@@ -12,5 +10,6 @@ body {
 		sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	padding: 20px 0 120px 0;
+	padding-bottom: 120px;
+	min-height: 100vh;
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Geocode from 'react-geocode';
-import './App.scss';
 import { AddressInput, Map, ListItems, Footer } from './component/index';
+import './App.scss';
 import { translateAndSave, fetchFromStorage, checkInStorage } from './utils';
 import { ADDRESS_STORAGE_KEY } from './constants';
 
@@ -13,11 +13,14 @@ class App extends Component {
 		markers: [],
 	};
 
-	handleKeyPress = e => {
-		const { target: { value } } = e;
-		console.log(value)
-		if (e.key === 'Enter') {
-			translateAndSave(value);
+	handleKeyPress = async ({ target: { value }, key }) => {
+
+		if (key === 'Enter') {
+			const response = await translateAndSave(value);
+
+			if (response.success) {
+				this.generateMarkers(fetchFromStorage(ADDRESS_STORAGE_KEY))
+			}
 		}
 	};
 
@@ -31,8 +34,8 @@ class App extends Component {
 			lat: item.coords.lat,
 			lng: item.coords.lng,
 		}));
-		console.log('markers', markers);
-		this.setState({ markers });
+
+		this.setState({ markers, items: data });
 	};
 
 	render() {

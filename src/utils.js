@@ -1,19 +1,18 @@
-export function saveToLocalStorage(address) {
-	const items = JSON.parse(localStorage.getItem('list-items'));
-	const item = {
-		address,
+export function saveToLocalStorage(obj) {
+	let currList = localStorage.getItem('list-items');
+	if (!currList) currList = [];
+	const itemToSave = {
 		id: new Date().getTime(),
-		coords: { lat: '', lng: '' },
-		// size: '',
-		// sizeUnit: '',
 		icon: '',
-		distance: '',
-		price: '',
+		...obj,
 	};
 
-	const newItems = [...items, item];
+	console.log('itemToSave', itemToSave);
+	console.log('cyrrList', currList);
+	const newItems = [...currList, itemToSave];
 	try {
 		localStorage.setItem('list-items', JSON.stringify(newItems));
+		console.log('%cSUCCESS SIR', 'color:red');
 		return true;
 	} catch (e) {
 		return false;

@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import Geocode from 'react-geocode';
 import './App.scss';
-import { AddressInput, Map } from './component/index';
+import { AddressInput, Map, ListItems } from './component/index';
 import { saveToLocalStorage, loadFromLocalStorage } from './utils';
+
+Geocode.setApiKey('AIzaSyCKgE8gvERM__LG9dDbOLpAgWoHEqYtZGI');
 
 class App extends Component {
 	state = {
@@ -13,13 +16,30 @@ class App extends Component {
 			target: { value },
 		} = e;
 		if (e.key === 'Enter') {
-			// this.setState({ [name]: value });
-			// console.log('Enter', value);
-			// this.saveAddressToList();
+			Geocode.fromAddress(value).then(
+				response => {
+					console.log('GeoCode response ->', response);
+					const result = response.results[0];
+					const { formatted_address } = result;
+					const [street, city, country] = formatted_address.split(', ');
+					const { lat, lng } = result.geometry.location;
+					console.log(`street: ${street}, city: ${city} country ${country}`);
+					console.log(`lat: ${lat}, lng: ${lng}`);
+					const addressItemTosave = {
+						address: formatted_address,
+						street,
+						city,
+						country,
+						coords: { lat, lng },
+					};
+					saveToLocalStorage(addressItemTosave);
+				},
+				error => {
+					console.error(error);
+				}
+			);
 		}
 	};
-
-	saveAddressToList = value => {};
 
 	render() {
 		return (
@@ -34,6 +54,7 @@ class App extends Component {
 					containerElement={<div className='map-container' />}
 					mapElement={<div style={{ height: `100%` }} />}
 				/>
+				<ListItems items={this.state.items} />
 			</div>
 		);
 	}

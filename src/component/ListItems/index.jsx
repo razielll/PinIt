@@ -5,9 +5,11 @@ const ListItems = props => {
 	return (
 		<div className='list-items-container'>
 			{props.items.map((item, i) => (
-				<ListItem>
-					<div key={i} className='item-container'>
-						<h2>address</h2>
+				<ListItem key={i}>
+					<div className='item-container'>
+						<img src={item.icon} alt='item-icon' />
+						<h2>{item.address}</h2>
+						<img src='' alt='trash' />
 					</div>
 				</ListItem>
 			))}

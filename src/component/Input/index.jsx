@@ -8,7 +8,7 @@ class AddressInput extends PureComponent {
 					className='address-input'
 					name='address'
 					// value={this.props.adress}
-					value='10 habastiliya, haifa'
+					defaultValue='10 habastiliya, haifa'
 					onKeyPress={this.props.onKeyPress}
 					placeholder='# Street, City'
 				/>

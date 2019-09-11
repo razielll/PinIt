@@ -1,18 +1,19 @@
 export function saveToLocalStorage(obj) {
-	let currList = localStorage.getItem('list-items');
-	if (!currList) currList = [];
+	const currList = localStorage.getItem('list-items')
+		? JSON.parse(localStorage.getItem('list-items'))
+		: [];
+
 	const itemToSave = {
 		id: new Date().getTime(),
 		icon: '',
 		...obj,
 	};
 
-	console.log('itemToSave', itemToSave);
-	console.log('cyrrList', currList);
 	const newItems = [...currList, itemToSave];
+	console.log('newItems ->', newItems);
+
 	try {
 		localStorage.setItem('list-items', JSON.stringify(newItems));
-		console.log('%cSUCCESS SIR', 'color:red');
 		return true;
 	} catch (e) {
 		return false;
@@ -23,7 +24,10 @@ export function loadFromLocalStorage() {
 	return JSON.parse(localStorage.getItem('list-items'));
 }
 
+export function isItems() {
+	return !!JSON.parse(localStorage.getItem('list-items'));
+}
+
 export function generateRandomID() {
-	// wtf what the actual fuck why use random when you have a package for this shit
 	return Math.floor((Math.random() * 9999999) | 0);
 }

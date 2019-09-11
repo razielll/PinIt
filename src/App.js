@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Geocode from 'react-geocode';
 import './App.scss';
-import { AddressInput, Map, ListItems } from './component/index';
+import { AddressInput, Map, ListItems, Footer } from './component/index';
 import { saveToLocalStorage, loadFromLocalStorage, isItems } from './utils';
 
 Geocode.setApiKey('AIzaSyCKgE8gvERM__LG9dDbOLpAgWoHEqYtZGI');
@@ -67,6 +67,7 @@ class App extends Component {
 						mapElement={<div style={{ height: `100%` }} />}
 					/>
 				</div>
+				<Footer />
 			</React.Fragment>
 		);
 	}

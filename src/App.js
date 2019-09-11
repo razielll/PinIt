@@ -88,6 +88,7 @@ class App extends Component {
 						loadingElement={<div style={{ height: `100%` }} />}
 						containerElement={<div className='map-container' />}
 						mapElement={<div style={{ height: `100%` }} />}
+						markers={this.state.markers}
 					/>
 				</div>
 				<Footer />

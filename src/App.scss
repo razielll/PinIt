@@ -7,17 +7,32 @@
 		width: 60vw;
 	}
 
+	.list-items-container {
+		width: 40vw;
+		.list-item {
+			height: 80px;
+			transition: 0.3s all ease-in-out;
+			&.expanded {
+				height: 400px;
+			}
+			.item-header {
+				display: flex;
+				justify-content: space-evenly;
+				align-items: center;
+			}
+		}
+	}
+
 	@media (max-width: 900px) {
 		flex-direction: column;
 		.map-container {
 			width: 100vw;
 			height: 80vh;
 		}
+		.list-items-container {
+			width: 100vw;
+		}
 	}
-}
-
-.list-items-container {
-	width: 40vw;
 }
 
 .input-container {

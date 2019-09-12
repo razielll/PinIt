@@ -27,7 +27,7 @@ test('check if item was added to the storage', () => {
 
     const savedAddress = JSON.parse(localStorage.__STORE__[ADDRESS_STORAGE_KEY])[0]
 
-    expect(localStorage.getItem).toHaveBeenCalledTimes(3);
+    expect(localStorage.getItem).toHaveBeenCalledTimes(2);
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
     expect(savedAddress.address).toBe(newAddress.address)
 

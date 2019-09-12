@@ -3,9 +3,7 @@
 		"browser": true,
 		"es6": true
 	},
-	"extends": [
-		"prettier"
-	],
+	"extends": ["prettier"],
 	"globals": {
 		"Atomics": "readonly",
 		"SharedArrayBuffer": "readonly"
@@ -19,9 +17,7 @@
 			"codeFrame": true
 		}
 	},
-	"plugins": [
-		"react"
-	],
+	"plugins": ["react"],
 	"rules": {
 		"strict": 0
 	}

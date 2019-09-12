@@ -7,13 +7,29 @@ import {
 	Marker,
 } from 'react-google-maps';
 
+function handleMarkerClick(e) {
+	console.log('marker click', e);
+}
+
+const defaultMapOptions = {
+	zoomControl: true,
+	mapTypeControl: false,
+	scaleControl: true,
+	streetViewControl: false,
+	rotateControl: false,
+	fullscreenControl: false,
+};
+
 const Map = withScriptjs(
 	withGoogleMap(props => (
-		<GoogleMap defaultZoom={8} defaultCenter={{ lat: -30.397, lng: 30.644 }}>
-			{props.markers.map(mark => {
-				console.log('one dya i will be marker', mark);
-				return <Marker position={{ lat: mark.lat, lng: mark.lng }} />;
-			})}
+		<GoogleMap ref={props.mapRef} options={defaultMapOptions} defaultZoom={8}>
+			{props.markers.map((mark, i) => (
+				<Marker
+					key={i}
+					onClick={handleMarkerClick}
+					position={{ lat: mark.lat, lng: mark.lng }}
+				/>
+			))}
 		</GoogleMap>
 	))
 );

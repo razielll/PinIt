@@ -22,7 +22,7 @@ const defaultMapOptions = {
 
 const Map = withScriptjs(
 	withGoogleMap(props => (
-		<GoogleMap ref={props.mapRef} options={defaultMapOptions} defaultZoom={8}>
+		<GoogleMap ref={props.mapRef} options={defaultMapOptions} defaultZoom={12}>
 			{props.markers.map((mark, i) => (
 				<Marker
 					key={i}

@@ -51,9 +51,7 @@ class App extends Component {
 			return setTimeout(() => this.fitBounds(), 330);
 		}
 		const bounds = new window.google.maps.LatLngBounds();
-		this.state.markers.map(mark => {
-			bounds.extend(mark);
-		});
+		this.state.markers.map(mark => bounds.extend(mark));
 		mapEl.fitBounds(bounds);
 	};
 

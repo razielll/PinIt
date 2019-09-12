@@ -11,7 +11,7 @@ const ListItems = ({ items, onDelete }) => (
 					<h2>{item.address}</h2>
 					<img
 						src='https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Trash_font_awesome.svg/512px-Trash_font_awesome.svg.png'
-						alt={item.address}
+						alt='delete'
 						height='24'
 						className='trash-icon'
 						onClick={e => {

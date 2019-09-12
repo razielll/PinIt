@@ -6,7 +6,7 @@ export function saveAddress(newAddress) {
 	let currentAddressList = [];
 
 	if (checkInStorage(ADDRESS_STORAGE_KEY)) {
-		currentAddressList = fetchFromStorage(ADDRESS_STORAGE_KEY)
+		currentAddressList = fetchFromStorage(ADDRESS_STORAGE_KEY);
 	}
 
 	const address = {
@@ -18,11 +18,23 @@ export function saveAddress(newAddress) {
 	const newAddressList = [...currentAddressList, address];
 
 	try {
-
 		localStorage.setItem(ADDRESS_STORAGE_KEY, JSON.stringify(newAddressList));
 		return true;
 	} catch (e) {
 		return false;
+	}
+}
+
+export function deleteFromStorage(id) {
+	const newAddressList = fetchFromStorage(ADDRESS_STORAGE_KEY).filter(
+		item => item.id !== id
+	);
+	try {
+		localStorage.setItem(ADDRESS_STORAGE_KEY, JSON.stringify(newAddressList));
+		return { result: true };
+	} catch (e) {
+		console.log('Error deleting id', id, e);
+		return { result: false };
 	}
 }
 
@@ -38,7 +50,9 @@ export async function translateAndSave(address) {
 	return Geocode.fromAddress(address).then(
 		({ results }) => {
 			const { formatted_address } = results[0];
-			const [street, city, country] = formatted_address.split(',').map(item => item.trim());
+			const [street, city, country] = formatted_address
+				.split(',')
+				.map(item => item.trim());
 			const { lat, lng } = results[0].geometry.location;
 
 			const item = {
@@ -56,7 +70,6 @@ export async function translateAndSave(address) {
 		error => {
 			console.error(error);
 			return { success: false };
-
 		}
 	);
 }

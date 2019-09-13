@@ -17,6 +17,8 @@
 		.list-item {
 			height: 80px;
 			transition: 0.3s all ease-in-out;
+			display: flex;
+			flex-direction: column;
 			&.expanded {
 				height: 400px;
 			}
@@ -28,7 +30,7 @@
 					height: 40px;
 				}
 				.pin {
-					transform: scale(2);
+					transform: scale(1.5);
 					margin: 0 8px 0 16px;
 				}
 			}

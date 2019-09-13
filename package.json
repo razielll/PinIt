@@ -1,62 +1,61 @@
 {
-  "name": "pinner",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "babel-eslint": "^10.0.3",
-    "node-sass": "^4.12.0",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-geocode": "^0.1.2",
-    "react-google-maps": "^9.4.5",
-    "react-scripts": "3.1.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "react-test": "react-scripts test",
-    "test": "jest",
-    "eject": "react-scripts eject"
-  },
-  "jest": {
-    "setupFiles": [
-      "jest-localstorage-mock"
-    ]
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
-  "main": "index.js",
-  "devDependencies": {
-    "@babel/plugin-transform-modules-commonjs": "^7.6.0",
-    "eslint": "^6.3.0",
-    "eslint-config-airbnb": "^18.0.1",
-    "eslint-config-prettier": "^6.3.0",
-    "eslint-plugin-react": "^7.14.3",
-    "jest": "^24.9.0",
-    "jest-localstorage-mock": "^2.4.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/razielll/pinner.git"
-  },
-  "author": "Anton & Mario",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/razielll/pinner/issues"
-  },
-  "homepage": "https://github.com/razielll/pinner#readme"
+	"name": "pinner",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"node-sass": "^4.12.0",
+		"react": "^16.9.0",
+		"react-dom": "^16.9.0",
+		"react-geocode": "^0.1.2",
+		"react-google-maps": "^9.4.5",
+		"react-scripts": "3.1.1"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"react-test": "react-scripts test",
+		"test": "jest",
+		"eject": "react-scripts eject"
+	},
+	"jest": {
+		"setupFiles": [
+			"jest-localstorage-mock"
+		]
+	},
+	"eslintConfig": {
+		"extends": "react-app"
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+	"main": "index.js",
+	"devDependencies": {
+		"@babel/plugin-transform-modules-commonjs": "^7.6.0",
+		"eslint": "^6.3.0",
+		"eslint-config-airbnb": "^18.0.1",
+		"eslint-config-prettier": "^6.3.0",
+		"eslint-plugin-react": "^7.14.3",
+		"jest": "24.8.0",
+		"jest-localstorage-mock": "^2.4.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/razielll/pinner.git"
+	},
+	"author": "Anton & Mario",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/razielll/pinner/issues"
+	},
+	"homepage": "https://github.com/razielll/pinner#readme"
 }
